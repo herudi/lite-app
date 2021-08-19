@@ -1,0 +1,26 @@
+{
+  "name": "lite-app",
+  "description": "Fast ~4kb (express like) nodejs micro framework.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/herudi/lite-app"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "version": "1.0.0",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "author": "Herudi",
+  "license": "MIT",
+  "scripts": {
+    "test": "ava"
+  },
+  "keywords": [
+    "Express alternative nodejs framework",
+    "Micro ~4kb nodejs web framework"
+  ],
+  "devDependencies": {
+    "ava": "^3.15.0"
+  }
+}
