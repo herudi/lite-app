@@ -79,6 +79,28 @@ app.use(prefix, ...middleware, [router1, router1]);
 app.use(prefix, [router1, router1]);
 app.use([router1, router1]);
 ```
+## Handle Error
+```js
+//example
+const { liteApp } = require('lite-app');
+
+//handle custom error
+function onError(err, req, res, next) {
+  res.statusCode = err.status || err.code || 500;
+  res.end('my custom error ' + err.message);
+}
+
+//handle custom not found (404)
+function on404(req, res, next) {
+  res.statusCode = 404;
+  res.end('my custom 404 ' + req.url);
+}
+
+//add error to options liteApp
+liteApp({ onError, on404 })
+  .get('/', (req, res) => {...})
+  .listen(8080);
+```
 See [examples](https://github.com/herudi/lite-app/tree/master/examples)
 
 ## License
