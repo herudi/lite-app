@@ -1,4 +1,4 @@
-// first install body-parser
+// install body-parser first
 // npm i body-parser
 
 const { urlencoded, json } = require('body-parser');

@@ -17,7 +17,8 @@ npm i lite-app
 //example
 const { liteApp } = require('lite-app');
 
-//initialize app like app = express()
+//initialize app.
+//like app = express()
 const app = liteApp();
 
 app.get('/', (req, res) => {
@@ -73,7 +74,7 @@ liteApp()
 ```
 ```js
 //usage
-liteRouter({ base?: string });
+const app = liteRouter({ base?: string });
 app.use(prefix, ...middleware, [router1, router1]);
 app.use(prefix, [router1, router1]);
 app.use([router1, router1]);

@@ -1,4 +1,4 @@
-// first install serve-static
+// install serve-static first
 // npm i serve-static
 
 const { liteApp } = require('../index');
