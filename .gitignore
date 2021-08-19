@@ -3,3 +3,4 @@ public
 dev.js
 yarn.lock
 package-lock.json
+.npmignore
