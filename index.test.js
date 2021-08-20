@@ -30,17 +30,19 @@ app
   .get('/*', () => { })
   .post('/item', () => { })
   .put('/item/:id', () => { })
-  .delete('/item/:id', () => { });
+  .delete('/item/:id', () => { })
+  .patch('/item/:extname.(png|jpg)', () => { });
 
 const METHOD_URL_MATCH = [
   ['GET', '/exact/all'],
   ['POST', '/item'],
   ['PUT', '/item/543'],
-  ['DELETE', '/item/789']
+  ['DELETE', '/item/789'],
+  ['PATCH', '/item/file.jpg'],
 ];
 
-test('count route method to be 4', t => {
-  t.is(Object.keys(app.route).length, 4);
+test('count route method to be 5', t => {
+  t.is(Object.keys(app.route).length, 5);
 });
 
 METHOD_URL_MATCH.forEach(([mtd, url]) => {

@@ -25,11 +25,11 @@ function createRegex(url) {
   if (/\*|\./.test(url)) url = url.replace(/(\/?)\*/g, '($1.*)?').replace(/\.(?=[\w(])/, '\\.');
   return { rgx: new RegExp(`^${url}/*$`), isParam };
 }
-const findBase = ({ u, x = u.indexOf('/', 1) }) => x !== -1 ? u.substring(0, x) : u;
+const fbase = ({ u, x = u.indexOf('/', 1) }) => x !== -1 ? u.substring(0, x) : u;
 const is = (a, b) => typeof a === b;
 const defError = (err, _, res) => { res.statusCode = err.status || 500; res.end(err.message) };
 const liteApp = ({
-  route = {}, subs = [], sub = false, wares = [], _static = {}, base = '',
+  route = {}, subs = [], sub = false, wares = [], asset, base = '',
   on404 = defError.bind(null, { status: 404, message: '404 not found' }),
   onError = defError,
   qsParse = (str) => Object.fromEntries(new URLSearchParams(str).entries()),
@@ -37,21 +37,22 @@ const liteApp = ({
 } = {}) => ({
   subs, route,
   handle(req, res) {
-    const { pathname, search: query } = urlParse(req), p = findBase({ u: pathname });
+    const { pathname, search: query } = urlParse(req);
     let { fns, params } = findRoute(pathname, req.method, route), i = 0;
     req.path = pathname;
     req.search = query;
     req.params = params;
     req.query = query ? req.query || qsParse(query.substring(1)) : {};
     req.originalUrl = req.originalUrl || req.url;
-    if (_static[p]) fns = _static[p].concat(fns);
+    if (asset) {
+      const p = fbase({ u: pathname });
+      if (asset[p]) fns = asset[p].concat(fns);
+    }
     fns = wares.concat(fns, [on404]);
     const next = (err) => {
       let ret;
       try {
-        ret = err
-          ? onError(err, req, res, next)
-          : !(res.finished || res.writableEnded) && fns[i++](req, res, next);
+        ret = err ? onError(err, req, res, next) : !(res.finished || res.writableEnded) && fns[i++](req, res, next);
       } catch (e) {
         return err ? defError(e, req, res, next) : next(e);
       }
@@ -71,7 +72,7 @@ const liteApp = ({
         }
       }
     } else if (str !== '') {
-      _static[str] = [(req, _, next) => {
+      (asset = asset || {})[str] = [(req, _, next) => {
         req.url = req.url.substring(str.length) || '/';
         req.path = req.path.substring(str.length) || '/';
         next();
