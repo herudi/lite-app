@@ -66,7 +66,7 @@ export interface ILiteApp<
 export declare const liteApp: <
   Req extends HttpRequest = HttpRequest,
   Res extends HttpResponse = HttpResponse
-  >(opts: {
+  >(opts?: {
     qsParse?: (str: string, ...args: any) => Record<string, any>;
     urlParse?: (req: Req, ...args: any) => Record<string, any>;
     onError?: (err: any, req: Req, res: Res, next: NextFunction) => any;
