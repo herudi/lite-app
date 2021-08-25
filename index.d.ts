@@ -71,6 +71,7 @@ export declare const liteApp: <
     urlParse?: (req: Req, ...args: any) => Record<string, any>;
     onError?: (err: any, req: Req, res: Res, next: NextFunction) => any;
     on404?: Handler<Req, Res>;
+    base?: string;
   }) => ILiteApp;
 
 export declare const liteRouter: <

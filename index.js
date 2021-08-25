@@ -87,7 +87,7 @@ const liteApp = ({
     get: (_, prop, rec) => (path, ...args) => {
       if (is(prop, 'string')) {
         let mtd = prop.toUpperCase(), fns = findFns(args);
-        if (!sub) (route[mtd] = route[mtd] || []).push([fns, createRegex(path)]);
+        if (!sub) (route[mtd] = route[mtd] || []).push([fns, createRegex(base + path)]);
         else subs.push({ fns, path: base + path, mtd });
       }
       return route && rec;
