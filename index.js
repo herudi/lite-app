@@ -10,7 +10,15 @@ function match(url, mtd, route) {
   }
   return { fns, params };
 }
-const findFns = (arr) => arr.flat().filter(el => typeof el === 'function');
+function findFns(arr) {
+  let ret = [], i = 0, len = arr.length;
+  while (i < len) {
+    if (Array.isArray(arr[i])) ret = ret.concat(findFns(arr[i]));
+    else if (is(arr[i], 'function')) ret.push(arr[i]);
+    i++;
+  };
+  return ret;
+}
 const createRegex = (path) => [
   new RegExp(`^${path.replace(/\/$/, '')
     .replace(/:(\w+)(\?)?(\.)?/g, '$2(?<$1>[^/]+)$2$3')

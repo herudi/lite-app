@@ -1,6 +1,6 @@
 # Lite App
 
-[![npm version](https://img.shields.io/badge/npm-1.0.5-blue.svg)](https://npmjs.org/package/lite-app) 
+[![npm version](https://img.shields.io/badge/npm-1.0.6-blue.svg)](https://npmjs.org/package/lite-app) 
 [![License](https://img.shields.io/:license-mit-blue.svg)](http://badges.mit-license.org)
 [![download-url](https://img.shields.io/npm/dm/lite-app.svg)](https://npmjs.org/package/lite-app)
 
