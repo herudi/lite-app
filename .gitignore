@@ -2,4 +2,5 @@ node_modules
 public
 dev.js
 yarn.lock
+package-lock.json
 .npmignore
