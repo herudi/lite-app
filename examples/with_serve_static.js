@@ -5,8 +5,5 @@ const { liteApp } = require('../index');
 const serveStatic = require('serve-static');
 
 liteApp()
-  .use('/assets', serveStatic('my_assets_folder'))
-  .get('/', (req, res) => {
-    res.end('hello')
-  })
+  .use('/assets', serveStatic('my_folder'))
   .listen(3000);

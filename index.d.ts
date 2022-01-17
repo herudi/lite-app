@@ -1,17 +1,21 @@
 import { IncomingMessage, ServerResponse } from 'http';
 
+type TObject = Record<string, any>;
+
 export type NextFunction = (err?: any) => any;
 export class HttpRequest extends IncomingMessage {
-  params: Record<string, any>;
+  params: TObject;
   path: string;
   search: string;
-  query: Record<string, any>;
-  body: Record<string, any>;
+  query: TObject;
+  body: TObject;
   originalUrl: string;
   [k: string]: any;
 }
 
 export class HttpResponse extends ServerResponse {
+  json: (data: TObject | TObject[] | null) => any;
+  send: (data?: TObject | TObject[] | string) => any;
   [k: string]: any;
 };
 

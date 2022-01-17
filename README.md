@@ -1,6 +1,6 @@
 # Lite App
 
-[![npm version](https://img.shields.io/badge/npm-1.0.4-blue.svg)](https://npmjs.org/package/lite-app) 
+[![npm version](https://img.shields.io/badge/npm-1.0.5-blue.svg)](https://npmjs.org/package/lite-app) 
 [![License](https://img.shields.io/:license-mit-blue.svg)](http://badges.mit-license.org)
 [![download-url](https://img.shields.io/npm/dm/lite-app.svg)](https://npmjs.org/package/lite-app)
 
@@ -22,7 +22,11 @@ const { liteApp } = require('lite-app');
 const app = liteApp();
 
 app.get('/', (req, res) => {
-  res.end('lite');
+  res.send('lite');
+});
+
+app.get('/json', (req, res) => {
+  res.json({ name: 'lite' });
 });
 
 app.listen(8080, () => {
@@ -87,13 +91,13 @@ const { liteApp } = require('lite-app');
 //handle custom error
 function onError(err, req, res, next) {
   res.statusCode = err.status || err.code || 500;
-  res.end('my custom error ' + err.message);
+  res.send('my custom error ' + err.message);
 }
 
 //handle custom not found (404)
 function on404(req, res, next) {
   res.statusCode = 404;
-  res.end('my custom 404 ' + req.url);
+  res.send('my custom 404 ' + req.url);
 }
 
 //add error to options liteApp

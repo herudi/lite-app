@@ -46,7 +46,7 @@ test('count route method to be 5', t => {
 });
 
 METHOD_URL_MATCH.forEach(([mtd, url]) => {
-  for (const [_, { rgx }] of app.route[mtd]) {
+  for (const [_, rgx] of app.route[mtd]) {
     test(`match for ${mtd}${url} from ${rgx.toString()}`, (t) => {
       t.is(rgx.test(url), true);
     });
